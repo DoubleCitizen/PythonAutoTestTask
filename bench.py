@@ -11,11 +11,28 @@ URL_REGEX = re.compile(r'^https?://[^\s/$.?#].[^\s]*$')
 
 
 def validate_url(url: str):
-    """Проверяет, соответствует ли URL формату http:// или https://."""
+    """Проверяет, соответствует ли URL формату http:// или https://.
+
+    Args:
+        url (str): URL, который необходимо проверить.
+
+    Returns:
+        bool: True, если URL соответствует формату, иначе False.
+    """
     return bool(URL_REGEX.match(url))
 
 
-def test_host(host: str, count: int):
+def test_host(host: str, count: int) -> dict:
+    """Отправляет запросы к указанному хосту и собирает статистику.
+
+    Args:
+        host (str): URL хоста, который нужно протестировать.
+        count (int): Количество запросов, которые нужно отправить.
+
+    Returns:
+        dict: Словарь с результатами тестирования, включая количество успешных,
+              неудачных запросов и время ответа.
+    """
     success = 0
     failed = 0
     errors = 0
@@ -55,26 +72,50 @@ def test_host(host: str, count: int):
 
 
 def read_file(path: Path) -> list[str]:
+    """Читает файл и возвращает список хостов.
+
+    Args:
+        path (Path): Путь к файлу, содержащему список хостов.
+
+    Returns:
+        list[str]: Список хостов, считанных из файла.
+    """
     with open(path, 'r') as file:
         hosts = file.read().split('\n')
     return hosts
 
 
 def write_file(path: Path, text_result: str):
+    """Записывает результат тестирования в указанный файл.
+
+    Args:
+        path (Path): Путь к файлу, в который будет записан результат.
+        text_result (str): Результат тестирования, который нужно записать.
+    """
     with open(path, 'a+') as file:
         file.write(text_result)
 
 
-def test_host_and_print_data(host: str, count: int, file_output: Path) -> str:
-    stats = test_host(host, count)
+def test_host_and_get_data(host: str, count: int, file_output: Path) -> str:
+    """Тестирует хост и формирует строку с результатами.
+
+    Args:
+        host (str): URL хоста, который нужно протестировать.
+        count (int): Количество запросов для отправки.
+        file_output (Path): Путь к файлу, в который будут записаны результаты.
+
+    Returns:
+        str: Строка с результатами тестирования.
+    """
+    stats: dict = test_host(host, count)
     text_result = ""
-    text_result += f"Statistics for host: {stats['Host']}"
-    text_result += f"\nSuccess: {stats['Success']}"
-    text_result += f"\nFailed: {stats['Failed']}"
-    text_result += f"\nErrors: {stats['Errors']}"
-    text_result += f"\nMin time: {stats['Min']:.4f} seconds"
-    text_result += f"\nMax time: {stats['Max']:.4f} seconds"
-    text_result += f"\nAvg time: {stats['Avg']:.4f} seconds\n"
+    text_result += f"Statistics for host: {stats.get('Host')}"
+    text_result += f"\nSuccess: {stats.get('Success')}"
+    text_result += f"\nFailed: {stats.get('Failed')}"
+    text_result += f"\nErrors: {stats.get('Errors')}"
+    text_result += f"\nMin time: {stats.get('Min'):.4f} seconds"
+    text_result += f"\nMax time: {stats.get('Max'):.4f} seconds"
+    text_result += f"\nAvg time: {stats.get('Avg'):.4f} seconds\n"
     if file_output is not None:
         write_file(file_output, text_result)
         return ""
@@ -82,6 +123,10 @@ def test_host_and_print_data(host: str, count: int, file_output: Path) -> str:
 
 
 def main():
+    """
+    Основная функция, которая обрабатывает аргументы командной строки
+    и запускает тестирование хостов.
+    """
     parser = argparse.ArgumentParser(description="HTTP Server Availability Tester")
     parser.add_argument("-H", "--hosts", type=str, help="Comma-separated list of hosts to test")
     parser.add_argument("-C", "--count", type=int, default=1, help="Number of requests to send to each host")
@@ -96,7 +141,6 @@ def main():
     file_read: Path = args.file
     file_output: Path = args.output
 
-    # Проверка параметров
     if args.count < 1:
         parser.error("Count must be a positive integer.")
 
@@ -114,7 +158,7 @@ def main():
             if validate_url(host):
                 host = host
                 futures.append(
-                    executor.submit(test_host_and_print_data, host, count, file_output)
+                    executor.submit(test_host_and_get_data, host, count, file_output)
                 )
 
         for i, future in enumerate(concurrent.futures.as_completed(futures)):
