@@ -1,0 +1,28 @@
+Statistics for host: https://chat.deepseek.com/a/chat/s/c0654b19-121d-488c-8e2d-76ba86a07427
+Success: 0
+Failed: 2
+Errors: 0
+Min time: 0.2016 seconds
+Max time: 0.2236 seconds
+Avg time: 0.2126 seconds
+Statistics for host: http://ya.ru
+Success: 2
+Failed: 0
+Errors: 0
+Min time: 0.2437 seconds
+Max time: 0.3576 seconds
+Avg time: 0.3006 seconds
+Statistics for host: https://google.com
+Success: 2
+Failed: 0
+Errors: 0
+Min time: 0.3825 seconds
+Max time: 0.4352 seconds
+Avg time: 0.4089 seconds
+Statistics for host: https://youtube.com
+Success: 0
+Failed: 0
+Errors: 2
+Min time: 0.0000 seconds
+Max time: 0.0000 seconds
+Avg time: 0.0000 seconds
