@@ -30,51 +30,6 @@ r'^https?://[^\s/$.?#].[^\s]*$'
     3. После этого может идти любое количество символов, которые не являются пробелами.
     4. Строка должна заканчиваться после этих символов (без пробелов в конце).
 ```
-
-# Примеры
-
-Команда запускает тестирование доступности сервера по http:
-
-
-```commandline
-python bench.py -H "http://ya.ru,https://google.com,https://youtube.com" -C 2
-
-# -H http://ya.ru, https://google.com, https://youtube.com
-# -C 5 количество запросов
-```
-Вывод:
-![python bench.py -H "http://ya.ru,https://google.com,https://youtube.com" -C 2](resources/1.png)
-Команда запускает тестирование доступности сервера по http:
-
-```commandline
-python bench.py -H "http://ya.ru,https://google.com,https://youtube.com" -C 2 -O output.txt
-
-# -H http://ya.ru,https://google.com,https://youtube.com
-# -C 2 количество запросов
-# -O text.txt
-```
-Вывод:
-![python bench.py -C 2 -O output.txt -F hosts.txt](resources/2.png)
-Команда запускает тестирование доступности сервера по http:
-
-```commandline
-python bench.py -C 2 -O output.txt -F hosts.txt
-
-# -C 2 количество запросов
-# -O text.txt
-# -F hosts.txt
-```
-
-Команда вызовет ошибку:
-usage: bench.py [-h] [-H HOSTS] [-C COUNT] [-F FILE] [-O OUTPUT]
-bench.py: error: Specify only one of -H/--hosts or -F/--file.
-
-```commandline
-python bench.py -H "http://ya.ru,https://google.com,https://youtube.com" -C 2 -O output.txt -F hosts.txt
-```
-Вывод:\
-(вывод аналогичен предыдущему)
----
 # Входной файл со ссылками
 
 
@@ -122,3 +77,46 @@ Min time: 0.0000 seconds
 Max time: 0.0000 seconds
 Avg time: 0.0000 seconds
 ```
+# Примеры
+
+Команда запускает тестирование доступности сервера по http:
+
+
+```commandline
+python bench.py -H "http://ya.ru,https://google.com,https://youtube.com" -C 2
+
+# -H http://ya.ru, https://google.com, https://youtube.com
+# -C 5 количество запросов
+```
+Вывод:
+![python bench.py -H "http://ya.ru,https://google.com,https://youtube.com" -C 2](resources/1.png)
+Команда запускает тестирование доступности сервера по http:
+
+```commandline
+python bench.py -H "http://ya.ru,https://google.com,https://youtube.com" -C 2 -O output.txt
+
+# -H http://ya.ru,https://google.com,https://youtube.com
+# -C 2 количество запросов
+# -O text.txt
+```
+Вывод:
+![python bench.py -C 2 -O output.txt -F hosts.txt](resources/2.png)
+Команда запускает тестирование доступности сервера по http:
+
+```commandline
+python bench.py -C 2 -O output.txt -F hosts.txt
+
+# -C 2 количество запросов
+# -O text.txt
+# -F hosts.txt
+```
+
+Команда вызовет ошибку:
+usage: bench.py [-h] [-H HOSTS] [-C COUNT] [-F FILE] [-O OUTPUT]
+bench.py: error: Specify only one of -H/--hosts or -F/--file.
+
+```commandline
+python bench.py -H "http://ya.ru,https://google.com,https://youtube.com" -C 2 -O output.txt -F hosts.txt
+```
+Вывод:\
+(вывод аналогичен предыдущему)
