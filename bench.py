@@ -10,7 +10,7 @@ import concurrent.futures
 URL_REGEX = re.compile(r'^https?://[^\s/$.?#].[^\s]*$')
 
 
-def validate_url(url: str):
+def validate_url(url: str) -> bool:
     """Проверяет, соответствует ли URL формату http:// или https://.
 
     Args:
