@@ -39,6 +39,7 @@ python bench.py -H "http://ya.ru,https://google.com,https://youtube.com" -C 2
 # -H http://ya.ru, https://google.com, https://youtube.com
 # -C 5 количество запросов
 ```
+Вывод:
 ![python bench.py -H "http://ya.ru,https://google.com,https://youtube.com" -C 2](resources/1.png)
 Команда запускает тестирование доступности сервера по http:
 
@@ -49,6 +50,8 @@ python bench.py -H "http://ya.ru,https://google.com,https://youtube.com" -C 2 -O
 # -C 2 количество запросов
 # -O text.txt
 ```
+Вывод:
+![python bench.py -C 2 -O output.txt -F hosts.txt](resources/2.png)
 Команда запускает тестирование доступности сервера по http:
 
 ```commandline
@@ -58,7 +61,7 @@ python bench.py -C 2 -O output.txt -F hosts.txt
 # -O text.txt
 # -F hosts.txt
 ```
-![python bench.py -C 2 -O output.txt -F hosts.txt](resources/2.png)
+
 Команда вызовет ошибку:
 usage: bench.py [-h] [-H HOSTS] [-C COUNT] [-F FILE] [-O OUTPUT]
 bench.py: error: Specify only one of -H/--hosts or -F/--file.
@@ -66,8 +69,13 @@ bench.py: error: Specify only one of -H/--hosts or -F/--file.
 ```commandline
 python bench.py -H "http://ya.ru,https://google.com,https://youtube.com" -C 2 -O output.txt -F hosts.txt
 ```
+Вывод:\
+(вывод аналогичен предыдущему)
 
-Файл hosts.txt должен выглядить примерно так:
+Пример файла hosts.txt может выглядить так (ссылки должны соответствовать регулярному выражению, упомянутого ранее):
+
+
+**Примечание:** ссылки разделяются \n то есть переходом на слеющую строку
 ```commandline
 http://ya.ru
 https://google.com
@@ -77,7 +85,7 @@ https://chat.deepseek.com/a/chat/s/c0654b19-121d-488c-8e2d-76ba86a07427
 
 
 
-При указании выходного файла (output.txt), данные в файл дописываются и выглядят примерно следующим образом:
+При указании выходного файла (output.txt), данные в файл дописываются и выглядят следующим образом:
 ```
 Statistics for host: https://youtube.com
 Success: 0
