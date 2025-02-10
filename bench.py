@@ -54,7 +54,7 @@ def test_host(host: str, count: int):
     }
 
 
-def read_file(path: Path):
+def read_file(path: Path) -> list[str]:
     with open(path, 'r') as file:
         hosts = file.read().split('\n')
     return hosts
@@ -89,9 +89,9 @@ def main():
     parser.add_argument("-O", "--output", type=Path, help="Writing output information to a file")
 
     args = parser.parse_args()
-    hosts = []
+    hosts: list[str] = []
     if args.hosts is not None:
-        hosts: str = args.hosts.split(',')
+        hosts: list[str] = args.hosts.split(',')
     count: int = args.count
     file_read: Path = args.file
     file_output: Path = args.output

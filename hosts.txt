@@ -1,3 +1,5 @@
 http://ya.ru
 https://google.com
 https://youtube.com
+https://chat.deepseek.com/a/chat/s/c0654b19-121d-488c-8e2d-76ba86a07427
+hello.world
